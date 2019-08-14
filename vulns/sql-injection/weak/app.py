@@ -15,10 +15,10 @@ def invalid_request(error):
 def get_posts(post_id):
     connection = utils.get_connection()
     cursor = connection.cursor()
-    # Create our prepared statement
-    SQL_STRING = 'SELECT * FROM posts WHERE post_id = %s'
-    cursor.execute(SQL_STRING, (post_id,))
+    SQL_STRING = 'SELECT * FROM posts WHERE post_id = ' + str(post_id)
+    cursor.execute(SQL_STRING)
     post = cursor.fetchall()
+    connection.close()
     return jsonify(post)
 
 if __name__ == '__main__':
